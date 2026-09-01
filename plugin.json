@@ -1,0 +1,35 @@
+{
+  "id": "nodebb-plugin-quiz",
+  "name": "NodeBB Quiz Plugin",
+  "description": "Create secure quizzes with role-based access and automatic grading",
+  "version": "0.1.0",
+  "author": {
+    "name": "Ammarah Quilor",
+    "url": "https://github.com/the-lucilia"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/the-lucilia/nodebb-plugin-quiz.git"
+  },
+  "nbbpm": {
+    "compatibility": "^4.15.0"
+  },
+  "hooks": [
+    {
+      "hook": "action:post.get",
+      "method": "attachQuizToPost"
+    },
+    {
+      "hook": "filter:post.parse",
+      "method": "parseQuizContent"
+    },
+    {
+      "hook": "action:admin.page.load",
+      "method": "registerAdminPages"
+    }
+  ],
+  "staticDirs": {
+    "public": "./public"
+  },
+  "templates": "views"
+}
