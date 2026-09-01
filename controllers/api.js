@@ -220,11 +220,14 @@ exports.deleteAttempt = async (req, res) => {
         const uid = req.user?.uid;
 
         if (!uid) {
-            return res.status(401).json({ error: 'Not logged in'},
-                await QuizAttempt.delete(attemptId, uid);
-                return res.json({ success: true });
-            } catch (err) {
-                console.error('Error deleting attempt:', err);
-                res.status(err.message.includes('authorized') ? 403 : 500).json({ error: err.message });
-            }
-        };
+            return res.status(401).json({ error: 'Not logged in' });
+        }
+
+        await QuizAttempt.delete(attemptId, uid);
+        return res.json({ success: true });
+    } catch (err) {
+        console.error('Error deleting attempt:', err);
+        res.status(err.message.includes('authorized') ? 403 : 500).json({ error: err.message });
+    }
+};
+
